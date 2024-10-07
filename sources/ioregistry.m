@@ -58,6 +58,7 @@ CGDisplayCount getOnlineDisplayInfos(DisplayInfos* displayInfos) {
  *  Returns display identifier based on identification method
  *  Allowed methods are:
  *  - id    Display ID                          "<id>"
+ *  - name  Product Name                        "<name>"
  *  - uuid  Display UUID                        "<uuid>"
  *  - edid  Display EDID UUID                   "<edid>"
  *  - seid  Display Alphnum SN + EDID UUID      "<an_serial>:<edid>"
@@ -68,6 +69,8 @@ CGDisplayCount getOnlineDisplayInfos(DisplayInfos* displayInfos) {
 NSString *getDisplayIdentifier(DisplayInfos *display, char *identificationMethod) {
     if (STR_EQ(identificationMethod, "id")) {
         return [NSString stringWithFormat:@"%u", display->id];
+    } else if (STR_EQ(identificationMethod, "name")) {
+        return display->productName;
     } else if (STR_EQ(identificationMethod, "uuid")) {
         return display->uuid;
     } else if (STR_EQ(identificationMethod, "edid")) {
